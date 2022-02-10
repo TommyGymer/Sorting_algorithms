@@ -16,13 +16,25 @@ class Sort():
     def __init__(self):
         for i in range(steps):
             self.items.append(i/steps)
-        #self.shuffle_items()
+        self.shuffle_items()
         #print(self.items)
         
     def shuffle_items(self):
         random.shuffle(self.items)
 
-test = Sort()
+class BubbleSort(Sort):
+    i = 0
+    def sort(self):
+        if self.i >= len(self.items) - 1:
+            self.i = 0
+            self.sort()
+        elif self.items[self.i] > self.items[self.i + 1]:
+            tmp = self.items[self.i]
+            self.items[self.i] = self.items[self.i + 1]
+            self.items[self.i + 1] = tmp
+        
+
+test = BubbleSort()
 
 
 window = Tk()
@@ -36,18 +48,18 @@ window.geometry(str(width) + "x" + str(height))
 
 #print(np.asarray(img))
 
-a = np.array(Sort.items)
-b = np.ones(len(Sort.items))
+a = np.array(test.items)
+#b = np.ones(len(Sort.items))
 
-pain = []
+#pain = []
 
-for i in range(width):
-    paintemp = []
-    for j in range(height):
-        paintemp.append([a[int((j*steps)/width)], 1, 1])
-    pain.append(paintemp)
+#for i in range(width):
+#    paintemp = []
+#    for j in range(height):
+#        paintemp.append([a[int()], 1, 1])
+#    pain.append(paintemp)
 
-print(np.array(pain))
+#print(np.array(pain))
 
 #print(np.vstack((a, b , b)).T)
 
@@ -58,9 +70,22 @@ print(np.array(pain))
 
 #print(np.array((np.vstack((a, b , b)).T, np.vstack((a, b , b)).T)))
 #img = Image.fromarray(np.array((np.vstack((a, b , b)).T, np.vstack((a, b , b)).T)), mode="HSV").resize((width, height))
-img = Image.fromarray(np.array(pain), mode="HSV").rotate(90)
+#img = Image.fromarray(np.array(pain), mode="HSV")#.rotate(90)
+
+#pain = np.array([a]).T
+#pain = np.insert(pain, 1, 1, axis=1)
+#pain = np.insert(pain, 1, 1, axis=1)
+
+#print(pain)
+img = Image.new("HSV", (width, height))
+
+for i in range(width):
+    for j in range(height):
+        img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
 
 nande = ImageTk.PhotoImage(img)
+
+#print(np.asarray(img))
 
 canvas = Canvas(window, bg='grey', width=width, height=height)
 canvas.pack(fill="both", expand="yes")
@@ -70,4 +95,21 @@ canvas.image = img
 
 #panel.pack(side="top", fill="both", expand="yes")
 
-window.mainloop()
+while True:
+    window.update_idletasks()
+    window.update()
+
+    test.sort()
+    a = np.array(test.items)
+
+    img = Image.new("HSV", (width, height))
+
+    #this is tool slow
+    for i in range(width):
+        for j in range(height):
+            img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
+
+    nande = ImageTk.PhotoImage(img)
+    canvas.delete("all")
+    canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
+    canvas.image = img
