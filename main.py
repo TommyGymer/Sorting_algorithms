@@ -16,7 +16,7 @@ class Sort():
     def __init__(self):
         for i in range(steps):
             self.items.append(i/steps)
-        self.shuffle_items()
+        #self.shuffle_items()
         #print(self.items)
         
     def shuffle_items(self):
@@ -39,6 +39,16 @@ window.geometry(str(width) + "x" + str(height))
 a = np.array(Sort.items)
 b = np.ones(len(Sort.items))
 
+pain = []
+
+for i in range(width):
+    paintemp = []
+    for j in range(height):
+        paintemp.append([a[int((j*steps)/width)], 1, 1])
+    pain.append(paintemp)
+
+print(np.array(pain))
+
 #print(np.vstack((a, b , b)).T)
 
 #print(np.block([np.flip(np.array(Sort.items), 1), np.ones((len(Sort.items),1)), np.ones((len(Sort.items),1))]))
@@ -47,14 +57,15 @@ b = np.ones(len(Sort.items))
 #panel = Label(window, image = ImageTk.PhotoImage(img))
 
 #print(np.array((np.vstack((a, b , b)).T, np.vstack((a, b , b)).T)))
-img = Image.fromarray(np.array((np.vstack((a, b , b)).T, np.vstack((a, b , b)).T)), mode="HSV")
+#img = Image.fromarray(np.array((np.vstack((a, b , b)).T, np.vstack((a, b , b)).T)), mode="HSV").resize((width, height))
+img = Image.fromarray(np.array(pain), mode="HSV").rotate(90)
 
 nande = ImageTk.PhotoImage(img)
 
 canvas = Canvas(window, bg='grey', width=width, height=height)
 canvas.pack(fill="both", expand="yes")
 
-canvas.create_image(50, 50, image=nande, state=NORMAL)
+canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
 canvas.image = img
 
 #panel.pack(side="top", fill="both", expand="yes")
