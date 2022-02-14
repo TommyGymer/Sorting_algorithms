@@ -36,6 +36,7 @@ class BubbleSort(Sort):
     def sort(self):
         if self.i >= len(self.items) - 1:
             self.i = 0
+            print("aaa")
             self.sort()
         elif self.items[self.i] > self.items[self.i + 1]:
             tmp = self.items[self.i]
@@ -45,19 +46,17 @@ class BubbleSort(Sort):
 
 test = BubbleSort()
 
-
 window = Tk()
 window.geometry(str(width) + "x" + str(height))
 #window.configure(background='blue')
 
-a = np.array(test.items)
+a = np.array([int(255*test.items[int(steps*(x/width))]) for x in range(width)])
+b = np.linspace(255, 255, num=len(a))
+l = np.concatenate((a,b,b), axis=0).reshape(3, width).T
+jkl = np.swapaxes(np.tile(l, height).reshape(width, height, 3), 0, 1)
 
-pain = [(int(255*a[int(steps*(x/width))]), 255, 255) for x in range(width)]
-asdf = [pain for i in range(height)]
-
-img = Image.fromarray(np.array(asdf, dtype=np.uint8), mode="HSV")
-
-nande = ImageTk.PhotoImage(img)
+img = np.array(jkl, dtype=np.uint8)
+nande = _photo_image(img)
 
 canvas = Canvas(window, bg='grey', width=width, height=height)
 canvas.pack(fill="both", expand="yes")
@@ -70,29 +69,17 @@ canvas.image = img
 while True:
     window.update_idletasks()
     window.update()
-
-    t0 = time.time()
+    
     test.sort()
-    print(f"Sort: {time.time() - t0}")
-
-    t0 = time.time()
+    
     a = np.array([int(255*test.items[int(steps*(x/width))]) for x in range(width)])
     b = np.linspace(255, 255, num=len(a))
     l = np.concatenate((a,b,b), axis=0).reshape(3, width).T
     jkl = np.swapaxes(np.tile(l, height).reshape(width, height, 3), 0, 1)
-    print(f"Image: {time.time() - t0}")
-
-    t0 = time.time() #this is taking most of the time: about 0.2s
-    #img = np.array(asdf, dtype=np.uint8)
+    
     img = np.array(jkl, dtype=np.uint8)
-    print(f"From array: {time.time() - t0}")
-
-    t0 = time.time()
     nande = _photo_image(img)
-    print(f"Photo: {time.time() - t0}")
 
-    t0 = time.time()
     canvas.delete("all")
     canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
     canvas.image = img
-    print(f"Display: {time.time() - t0}")
