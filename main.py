@@ -3,12 +3,20 @@ import random
 from tkinter import *
 from PIL import ImageTk, Image
 import numpy as np
+import time
+import cv2
 
 steps = 500
 width = 960
 
 count = 8
 height = 480
+
+def _photo_image(image: np.ndarray):
+    height, width = image.shape[:2]
+    ppm_header = f'P6 {width} {height} 255 '.encode()
+    data = ppm_header + cv2.cvtColor(image, cv2.COLOR_BGR2RGB).tobytes()
+    return tk.PhotoImage(width=width, height=height, data=data, format='PPM')
 
 class Sort():
     items = []
@@ -62,17 +70,27 @@ while True:
     window.update_idletasks()
     window.update()
 
-    #test.sort()
-    #a = np.array(test.items)
+    t0 = time.time()
+    test.sort()
+    print(f"Sort: {time.time() - t0}")
+    a = np.array(test.items)
 
-    #img = Image.new("HSV", (width, height))
+    t0 = time.time()
+    pain = [(int(255*a[int(steps*(x/width))]), 255, 255) for x in range(width)]
+    asdf = [pain for i in range(height)]
+    print(f"Image: {time.time() - t0}")
 
-    #this is tool slow
-    #for i in range(width):
-    #    for j in range(height):
-    #        img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
+    t0 = time.time() #this is taking most of the time; between 0.2 and 0.3 seconds
+    img = Image.fromarray(np.array(asdf, dtype=np.uint8), mode="HSV")
+    print(f"From array: {time.time() - t0}")
 
+    t0 = time.time()
     #nande = ImageTk.PhotoImage(img)
-    #canvas.delete("all")
-    #canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
-    #canvas.image = img
+    nande = _photo_image(img)
+    print(f"Photo: {time.time() - t0}")
+
+    t0 = time.time()
+    canvas.delete("all")
+    canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
+    canvas.image = img
+    print(f"Display: {time.time() - t0}")
