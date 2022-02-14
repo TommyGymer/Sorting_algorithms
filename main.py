@@ -80,7 +80,7 @@ while True:
     b = np.linspace(255, 255, num=len(a))
     l = np.concatenate((a,b,b), axis=0).reshape(3, width).T
     jkl = np.tile(l, height).reshape(height, width, 3)
-    #print(jkl)
+    print(jkl)
 
     #pain = [(int(255*test.items[int(steps*(x/width))]), 255, 255) for x in range(width)]
     #a = np.array([0, 64, 128, 192, 256])
