@@ -74,19 +74,25 @@ while True:
     t0 = time.time()
     test.sort()
     print(f"Sort: {time.time() - t0}")
-    a = np.array(test.items)
 
     t0 = time.time()
-    pain = [(int(255*a[int(steps*(x/width))]), 255, 255) for x in range(width)]
+    a = np.array([int(255*test.items[int(steps*(x/width))]) for x in range(width)])
+    b = np.linspace(255, 255, num=len(a))
+    l = np.concatenate((a,b,b), axis=0).reshape(3, width).T
+    jkl = np.tile(l, height).reshape(height, width, 3)
+    #print(jkl)
+
+    #pain = [(int(255*test.items[int(steps*(x/width))]), 255, 255) for x in range(width)]
     #a = np.array([0, 64, 128, 192, 256])
     #b = np.linspace(256, 256, num=5)
     #np.concatenate((a,b,b), axis=0).reshape(3, 5).T
-    asdf = [pain for i in range(height)]
+    #asdf = [pain for i in range(height)]
     #np.concatenate((l, l, l)).reshape(3, 5, 3)
     print(f"Image: {time.time() - t0}")
 
     t0 = time.time() #this is taking most of the time: about 0.2s
-    img = np.array(asdf, dtype=np.uint8)
+    #img = np.array(asdf, dtype=np.uint8)
+    img = np.array(jkl, dtype=np.uint8)
     print(f"From array: {time.time() - t0}")
 
     t0 = time.time()
