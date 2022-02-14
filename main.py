@@ -12,11 +12,12 @@ width = 960
 count = 8
 height = 480
 
+#convert numpy array directly to PPM format for tkinter to read
 def _photo_image(image: np.ndarray):
     height, width = image.shape[:2]
     ppm_header = f'P6 {width} {height} 255 '.encode()
-    data = ppm_header + cv2.cvtColor(image, cv2.COLOR_BGR2RGB).tobytes()
-    return tk.PhotoImage(width=width, height=height, data=data, format='PPM')
+    data = ppm_header + cv2.cvtColor(image, cv2.COLOR_HSV2RGB).tobytes()
+    return ImageTk.PhotoImage(width=width, height=height, data=data, format='PPM')
 
 class Sort():
     items = []
@@ -80,12 +81,11 @@ while True:
     asdf = [pain for i in range(height)]
     print(f"Image: {time.time() - t0}")
 
-    t0 = time.time() #this is taking most of the time; between 0.2 and 0.3 seconds
-    img = Image.fromarray(np.array(asdf, dtype=np.uint8), mode="HSV")
+    t0 = time.time() #this is taking most of the time: about 0.2s
+    img = np.array(asdf, dtype=np.uint8)
     print(f"From array: {time.time() - t0}")
 
     t0 = time.time()
-    #nande = ImageTk.PhotoImage(img)
     nande = _photo_image(img)
     print(f"Photo: {time.time() - t0}")
 
