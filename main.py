@@ -78,7 +78,11 @@ while True:
 
     t0 = time.time()
     pain = [(int(255*a[int(steps*(x/width))]), 255, 255) for x in range(width)]
+    #a = np.array([0, 64, 128, 192, 256])
+    #b = np.linspace(256, 256, num=5)
+    #np.concatenate((a,b,b), axis=0).reshape(3, 5).T
     asdf = [pain for i in range(height)]
+    #np.concatenate((l, l, l)).reshape(3, 5, 3)
     print(f"Image: {time.time() - t0}")
 
     t0 = time.time() #this is taking most of the time: about 0.2s
