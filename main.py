@@ -97,7 +97,7 @@ asdf = [pain for i in range(height)]
 
 #print(np.array(asdf))
 
-img = Image.fromarray(np.array(asdf), mode="HSV")
+img = Image.fromarray(np.array(asdf, dtype=np.uint8), mode="HSV")
 
 nande = ImageTk.PhotoImage(img)
 
