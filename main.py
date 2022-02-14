@@ -76,12 +76,28 @@ a = np.array(test.items)
 #pain = np.insert(pain, 1, 1, axis=1)
 #pain = np.insert(pain, 1, 1, axis=1)
 
-#print(pain)
-img = Image.new("HSV", (width, height))
+pain = [(int(255*a[int(steps*(x/width))]), 255, 255) for x in range(width)]
+asdf = [pain for i in range(height)]
 
-for i in range(width):
-    for j in range(height):
-        img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
+#print(np.array(asdf))
+
+#print(pain)
+#img = Image.new("HSV", (width, height))
+
+#for i in range(width):
+#    for j in range(height):
+#        img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
+
+#print(np.array(a).T)
+#print(np.asarray(img))
+
+#print("---------------------")
+
+#img = Image.fromarray(, mode="HSV")
+
+#print(np.array(asdf))
+
+img = Image.fromarray(np.array(asdf), mode="HSV")
 
 nande = ImageTk.PhotoImage(img)
 
@@ -99,17 +115,17 @@ while True:
     window.update_idletasks()
     window.update()
 
-    test.sort()
-    a = np.array(test.items)
+    #test.sort()
+    #a = np.array(test.items)
 
-    img = Image.new("HSV", (width, height))
+    #img = Image.new("HSV", (width, height))
 
     #this is tool slow
-    for i in range(width):
-        for j in range(height):
-            img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
+    #for i in range(width):
+    #    for j in range(height):
+    #        img.putpixel((i, j), (int(255*(a[int((i * steps)/width)])), 255, 255))
 
-    nande = ImageTk.PhotoImage(img)
-    canvas.delete("all")
-    canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
-    canvas.image = img
+    #nande = ImageTk.PhotoImage(img)
+    #canvas.delete("all")
+    #canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
+    #canvas.image = img
