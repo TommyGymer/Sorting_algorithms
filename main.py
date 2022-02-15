@@ -52,7 +52,11 @@ class BubbleSort(Sort):
             return 1
         else:
             return 0
-        
+
+class QuickSort(Sort):
+    i = 0
+    def sort(self):
+        i += 1
 
 test = BubbleSort()
 
