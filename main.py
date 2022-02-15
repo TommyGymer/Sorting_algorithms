@@ -14,7 +14,7 @@ width = 960
 count = 8
 height = 480
 
-make_gif = False
+make_gif = True
 
 #convert numpy array directly to PPM format for tkinter to read
 def _photo_image(image: np.ndarray):
