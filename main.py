@@ -1,4 +1,3 @@
-import colorsys #values between 0 and 1
 import random
 from tkinter import *
 from PIL import ImageTk, Image
@@ -14,7 +13,7 @@ width = 960
 count = 8
 height = 480
 
-make_gif = True
+make_gif = False
 
 #convert numpy array directly to PPM format for tkinter to read
 def _photo_image(image: np.ndarray):
