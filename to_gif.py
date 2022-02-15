@@ -10,5 +10,7 @@ with imageio.get_writer(".\\bubble.gif", mode="I", fps=60) as writer:
   for f in things:
     image = imageio.imread(f)
     writer.append_data(image)
+  for i in range(30):
+    writer.append_data(imageio.imread(things[-1]))
 
 optimize(".\\bubble.gif")
