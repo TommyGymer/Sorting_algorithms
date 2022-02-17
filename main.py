@@ -66,6 +66,7 @@ class BubbleSort(Sort):
 
 class QuickSort(Sort):
     i = 0
+    stack = []
     def sort(self):
         i += 1
 
