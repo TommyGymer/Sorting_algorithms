@@ -66,8 +66,19 @@ class BubbleSort(Sort):
 
 class QuickSort(Sort):
     i = 0
-    stack = []
+    pivot = -1
+    left = []
+    right = []
     def sort(self):
+        if pivot == -1:
+            pivot = int(len(self.items) / 2)
+            #init left and right
+            #use a list of past pivots to find the nearest sorted items in each direction and stop at these
+        else:
+            for i in left:
+                print("not implemented")
+            for i in right:
+                print("not implemented")
         i += 1
 
 test = BubbleSort()
