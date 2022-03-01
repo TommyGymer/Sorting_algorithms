@@ -67,21 +67,40 @@ class BubbleSort(Sort):
 class QuickSort(Sort):
     i = 0
     pivot = -1
-    left = []
-    right = []
-    def sort(self):
-        if pivot == -1:
-            pivot = int(len(self.items) / 2)
-            #init left and right
-            #use a list of past pivots to find the nearest sorted items in each direction and stop at these
-        else:
-            for i in left:
-                print("not implemented")
-            for i in right:
-                print("not implemented")
-        i += 1
+    stack = []
+    small = 0
+    large = 0
 
-test = BubbleSort()
+    def sort(self):
+        if self.pivot == None:
+            self.pivot = self.items[self.pivot]
+        elif self.i < len(self.stack[-1]):
+            if self.items[self.i] > self.items[self.pivot]:
+                self.items = self.items[::small] + self.items[pivot] + self.items[-large::]
+            else:
+                self.small.append(self.stack[-1][self.i])
+        else:
+            self.stack.pop()
+            if len(large) > 1:
+                self.stack.append(copy.copy(large))
+            if len(small) > 1:
+                self.stack.append(copy.copy(small))
+            large = []
+            small = []
+            self.i = -1
+
+        print(self.stack)
+        self.items = self.small + self.large + self.stack[-1][self.i::]
+
+        if self.items == self.ref:
+            self.done = True
+            return 1
+        else:
+            return 0
+        
+        self.i += 1
+
+test = QuickSort()
 
 window = Tk()
 window.geometry(str(width) + "x" + str(height))
