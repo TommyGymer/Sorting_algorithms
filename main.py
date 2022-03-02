@@ -71,6 +71,12 @@ class QuickSort(Sort):
     small = 0
     large = 0
 
+    #Add each list along with start and end index into self.items
+    #Use of a temp-stack for the next depth might be necessary
+    #Pick a pivot and process each of the lists within the stack
+    #Then add the left and right of each of these lists to the temp-stack
+    #Once the current stack is empty, swap the stacks
+
     def sort(self):
         if self.pivot == None:
             self.pivot = self.items[self.pivot]
