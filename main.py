@@ -7,7 +7,7 @@ import cv2
 import copy
 import os
 
-steps = 32
+steps = 64
 width = 960
 
 count = 8
@@ -64,6 +64,31 @@ class BubbleSort(Sort):
         else:
             return 0
 
+class InsertionSort(Sort):
+    i = 0
+    j = 0
+    prev = 0
+    def sort(self):
+        print(f"{self.i}, {self.j}, {self.prev}")
+        if self.j == 0 or self.i == 0:
+            self.i += 1
+            self.prev = self.i
+            self.j = self.i
+        self.j -= 1
+        if self.items[self.i] < self.items[self.j]:
+            tmp = copy.copy(self.items[self.i])
+            self.items[self.i] = self.items[self.j]
+            self.items[self.j] = tmp
+            self.i -= 1
+        else:
+            self.i = self.prev
+            self.j = 0
+        if self.items == self.ref:
+            self.done = True
+            return 1
+        else:
+            return 0
+
 class QuickSort(Sort):
     i = 0
     pivot = -1
@@ -106,7 +131,7 @@ class QuickSort(Sort):
         
         self.i += 1
 
-test = QuickSort()
+test = InsertionSort()
 
 window = Tk()
 window.geometry(str(width) + "x" + str(height))
@@ -153,5 +178,6 @@ while running:
             canvas.delete("all")
             canvas.create_image(width/2, height/2, image=nande, state=NORMAL)
             canvas.image = img
-    except:
+    except Exception as e:
+        print(e)
         break
