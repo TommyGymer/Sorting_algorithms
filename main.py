@@ -92,7 +92,6 @@ class InsertionSort(Sort):
 class QuickSort(Sort):
     i = 0
     pivot = -1
-    stack = []
     small = 0
     large = 0
 
@@ -103,35 +102,28 @@ class QuickSort(Sort):
     #Once the current stack is empty, swap the stacks
 
     def sort(self):
-        if self.pivot == None:
-            self.pivot = self.items[self.pivot]
-        elif self.i < len(self.stack[-1]):
-            if self.items[self.i] > self.items[self.pivot]:
-                self.items = self.items[::small] + self.items[pivot] + self.items[-large::]
-            else:
-                self.small.append(self.stack[-1][self.i])
-        else:
-            self.stack.pop()
-            if len(large) > 1:
-                self.stack.append(copy.copy(large))
-            if len(small) > 1:
-                self.stack.append(copy.copy(small))
-            large = []
-            small = []
-            self.i = -1
-
-        print(self.stack)
-        self.items = self.small + self.large + self.stack[-1][self.i::]
-
+        if self.items[self.i] < self.items[self.pivot]:
+            tmp = copy.copy(self.items[self.small])
+            self.items[self.small] = self.items[self.i]
+            self.items[self.i] = tmp
+            self.small += 1
+        elif self.items[self.i] > self.items[self.pivot]:
+            tmp = copy.copy(self.items[self.small + self.large])
+            self.items[self.small + self.large] = self.items[self.i]
+            self.items[self.i] = tmp
+            self.large += 1
+        self.i += 1
+        if self.i == len(self.items):
+            #need to pick a new pivot
+            self.done = True
+        
         if self.items == self.ref:
             self.done = True
             return 1
         else:
             return 0
-        
-        self.i += 1
 
-test = InsertionSort()
+test = QuickSort()
 
 window = Tk()
 window.geometry(str(width) + "x" + str(height))
