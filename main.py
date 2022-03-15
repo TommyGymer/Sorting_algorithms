@@ -7,7 +7,7 @@ import cv2
 import copy
 import os
 
-steps = 64
+steps = 256
 width = 960
 
 count = 8
@@ -69,7 +69,7 @@ class InsertionSort(Sort):
     j = 0
     prev = 0
     def sort(self):
-        print(f"{self.i}, {self.j}, {self.prev}")
+        #print(f"{self.i}, {self.j}, {self.prev}")
         if self.j == 0 or self.i == 0:
             self.i += 1
             self.prev = self.i
