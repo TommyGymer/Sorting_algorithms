@@ -13,4 +13,4 @@ A Python demo of different sorting algorithms
 ![Bubble Sort](https://tommygymer.github.io/Sorting_algorithms/bubble.gif)
 
 - Insertion Sort:
-![Insertion Sort](https://tommygymer.github.io/Sorting_algorithms/insertion.gif)
+![Insertion Sort](https://tommygymer.github.io/Sorting_algorithms/insert.gif)
