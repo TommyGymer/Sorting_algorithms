@@ -11,3 +11,6 @@ A Python demo of different sorting algorithms
 ---
 - Bubble Sort:
 ![Bubble Sort](https://tommygymer.github.io/Sorting_algorithms/bubble.gif)
+
+- Insertion Sort:
+![Insertion Sort](https://tommygymer.github.io/Sorting_algorithms/insertion.gif)
