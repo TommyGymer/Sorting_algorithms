@@ -14,3 +14,7 @@ A Python demo of different sorting algorithms
 
 - Insertion Sort:
 ![Insertion Sort](https://tommygymer.github.io/Sorting_algorithms/insert.gif)
+
+### Planned
+---
+- Quick sort
