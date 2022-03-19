@@ -13,7 +13,7 @@ width = 960
 count = 8
 height = 480
 
-make_gif = True
+make_gif = False
 
 #convert numpy array directly to PPM format for tkinter to read
 def _photo_image(image: np.ndarray):
@@ -114,6 +114,10 @@ class QuickSort(Sort):
             self.large += 1
         self.i += 1
         if self.i == len(self.items):
+            for k in range(self.small, self.small + self.large - 1):
+                tmp = copy.copy(self.items[k+1])
+                self.items[k+1] = self.items[k]
+                self.items[k] = tmp
             #need to pick a new pivot
             self.done = True
         
@@ -123,7 +127,7 @@ class QuickSort(Sort):
         else:
             return 0
 
-test = BubbleSort()
+test = QuickSort()
 
 window = Tk()
 window.geometry(str(width) + "x" + str(height))
